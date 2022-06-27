@@ -5,15 +5,24 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
-@Entity
+
 public class User {
-
-
-	private Integer id;
-	private String name;
-	private Date dateOfBirth;
 	
+	private Integer id;
+	
+	@Size(min=2, message=" User shound have at least 2 caracters")
+	private String name;
+	
+	@Past(message="Date should be in the past")
+	private Date dateOfBirth;
+
+	protected User() {
+		
+	}
 	public User(Integer id, String name, Date dateOfBirth) {
 		super();
 		this.id = id;
@@ -49,9 +58,5 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + "]";
 	}
-	
-	
-
-	
 
 }
